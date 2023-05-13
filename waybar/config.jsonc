@@ -5,10 +5,10 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
-    "height": 50,
+    "height": 25,
     "modules-left": ["clock","wlr/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["network", "bluetooth", "temperature","battery","backlight","pulseaudio","pulseaudio#microphone","tray"],
+    "modules-right": ["network", "pulseaudio", "pulseaudio#microphone","temperature","battery","tray"],
     "hyprland/window": {
         "format": "{}"
     },
@@ -43,14 +43,6 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
-    "backlight": {
-        "device": "intel_backlight",
-        "format": " {percent}%",
-        "on-scroll-up": "brightnessctl set 1%+",
-        "on-scroll-down": "brightnessctl set 1%-",
-        "min-length": 6
-    },
-
     "battery": {
         "states": {
             "good": 95,
@@ -66,9 +58,10 @@
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "tooltip": false,
+        "tooltip": true,
         "format-muted": " Muted",
         "on-click": "pamixer -t",
+        "on-click-right": "pavucontrol -t 3",
         "on-scroll-up": "pamixer -i 5",
         "on-scroll-down": "pamixer -d 5",
         "scroll-step": 5,
@@ -88,6 +81,7 @@
         "format-source": " {volume}%",
         "format-source-muted": " Muted",
         "on-click": "pamixer --default-source -t",
+        "on-click-right": "pavucontrol -t 4",
         "on-scroll-up": "pamixer --default-source -i 5",
         "on-scroll-down": "pamixer --default-source -d 5",
         "scroll-step": 5
@@ -95,7 +89,6 @@
     
     "temperature": {
         "interval":5,
-        "thermal-zone": 1,
         "format": "{temperatureC}°C ",
         "critical-threshold": 80,
         "format-critical": "{temperatureC}°C "
@@ -110,16 +103,6 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
-    },
-
-    "bluetooth": {
-	    "format": " {status}",
-	    "format-disabled": "", // an empty format will hide the module
-	    "format-connected": " {num_connections}",
-	    "tooltip-format": "{device_alias}",
-	    "tooltip-format-connected": " {device_enumerate}",
-	    "tooltip-format-enumerate-connected": "{device_alias}"
     }
-
     
 }
